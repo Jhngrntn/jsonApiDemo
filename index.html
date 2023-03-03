@@ -9,26 +9,28 @@
             {
                 //Seattle's Lat & Long (I looked it up)
                 var lat = "47.6062";
-                            var long = "-122.3321";
+				var long = "-122.3321";
 
-                            //The NOAA api link
-                            var apiLink = "https://api.weather.gov/points/"+lat+","+long;
-                            
-                            //function to extract json data (I shared this already)
-                            async function getData(url) {
-                                const response = await fetch(url);
+				//The NOAA api link
+				var apiLink = "https://api.weather.gov/points/"+lat+","+long;
+				
+				//function to extract json data (I shared this already)
+				async function getData(url) {
+					const response = await fetch(url);
 
-                                return response.json();
-                            }
+					return response.json();
+				}
 
-                            //get initial json-- then I noticed another link inside that actually had the forecast
-                            var data = await getData(apiLink);
+				//gets initial json-- then I noticed another link inside this structure that actually had the forecast
+				var data = await getData(apiLink);
 
-                            //forecast link with more json data (reusing the same function as above)
-                            var apiForecast = await getData(data["properties"]["forecast"]);
+				//forecast link with more json data (reusing the same function as above)
+				var apiForecast = await getData(data["properties"]["forecast"]);
 
-                            //Print the detailed forecast
-                            document.getElementById("output").innerHTML = apiForecast["properties"]["periods"][0]["detailedForecast"];
+				//Print the detailed forecast
+				document.getElementById("output").innerHTML = apiForecast["properties"]["periods"][0]["detailedForecast"];
+				
+				//BOOM. Done.
             }
 
             //Call the function
