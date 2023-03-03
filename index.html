@@ -20,13 +20,13 @@
 			return response.json();
 		}
 
-		//gets initial json-- then I noticed another link inside this structure that actually had the forecast
+		//gets initial json-- then I noticed another link inside this json structure that actually had the forecast...
 		var data = await getData(apiLink);
 
-		//forecast link within the original json data (reusing the same function as above)
+		//...so I ran the same opperation on that link (reusing the same function as above)
 		var apiForecast = await getData(data["properties"]["forecast"]);
 
-		//print the detailed forecast in the above 'p' tag
+		//then print the detailed forecast in the above 'p' tag
 		document.getElementById("output").innerHTML = apiForecast["properties"]["periods"][0]["detailedForecast"];
 
 		//BOOM. Done.
